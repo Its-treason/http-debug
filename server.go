@@ -45,6 +45,10 @@ func (s *Server) routes() {
 
 	s.mux.HandleFunc("/status/{status}", s.handleStatusCode)
 
+	s.mux.HandleFunc("GET /user-agent", s.handleUserAgent)
+	s.mux.HandleFunc("GET /ip", s.handleIp)
+	s.mux.HandleFunc("GET /headers", s.handleHeader)
+
 	s.mux.HandleFunc("GET /_health", s.handleHealth)
 }
 

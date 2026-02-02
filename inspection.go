@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -56,8 +57,33 @@ func (s *Server) handleAnything(w http.ResponseWriter, r *http.Request) {
 		Host:          r.Host,
 	})
 	if err != nil {
+		errMessage := fmt.Sprintf("Failed to encode JSON: %s", err)
+		w.Write([]byte(errMessage))
+		w.WriteHeader(500)
 		return
 	}
 	w.Header().Add("content-type", "application/json")
 	w.Write(jsonEncoded)
+}
+
+func (s *Server) handleUserAgent(w http.ResponseWriter, r *http.Request) {
+	userAgent := r.Header.Get("user-agent")
+	w.Write([]byte(userAgent))
+}
+
+func (s *Server) handleHeader(w http.ResponseWriter, r *http.Request) {
+	headers, err := json.Marshal(r.Header)
+	if err != nil {
+		errMessage := fmt.Sprintf("Failed to encode JSON: %s", err)
+		w.Write([]byte(errMessage))
+		w.WriteHeader(500)
+		return
+	}
+
+	w.Write(headers)
+}
+
+func (s *Server) handleIp(w http.ResponseWriter, r *http.Request) {
+	ip := r.RemoteAddr
+	w.Write([]byte(ip))
 }
