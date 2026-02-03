@@ -49,6 +49,10 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /ip", s.handleIp)
 	s.mux.HandleFunc("GET /headers", s.handleHeader)
 
+	s.mux.HandleFunc("/redirect-to", s.handleRedirectTo)
+	s.mux.HandleFunc("GET /absolute-redirect/{count}", s.handleAbsoluteRedirects)
+	s.mux.HandleFunc("GET /relative-redirect/{count}", s.handleRelativeRedirects)
+
 	s.mux.HandleFunc("GET /_health", s.handleHealth)
 }
 
