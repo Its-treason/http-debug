@@ -63,5 +63,4 @@ func (s *Server) handleRelativeRedirects(w http.ResponseWriter, r *http.Request)
 
 	w.Header().Add("Location", fmt.Sprintf("%d", countInt))
 	w.WriteHeader(http.StatusFound)
-
 }

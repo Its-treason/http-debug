@@ -53,6 +53,8 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /absolute-redirect/{count}", s.handleAbsoluteRedirects)
 	s.mux.HandleFunc("GET /relative-redirect/{count}", s.handleRelativeRedirects)
 
+	s.mux.HandleFunc("GET /basic-auth/{username}/{password}", s.handleBasicAuth)
+
 	s.mux.HandleFunc("GET /_health", s.handleHealth)
 }
 
