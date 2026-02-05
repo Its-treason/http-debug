@@ -55,6 +55,8 @@ func (s *Server) routes() {
 
 	s.mux.HandleFunc("GET /basic-auth/{username}/{password}", s.handleBasicAuth)
 	s.mux.HandleFunc("GET /bearer-auth/{token}", s.handleBearerAuth)
+	s.mux.HandleFunc("GET /digest-auth/{username}/{password}", s.handleDigestAuth)
+	s.mux.HandleFunc("GET /digest-auth/{username}/{password}/{algo}", s.handleDigestAuth)
 
 	s.mux.HandleFunc("GET /_health", s.handleHealth)
 }
