@@ -54,6 +54,7 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /relative-redirect/{count}", s.handleRelativeRedirects)
 
 	s.mux.HandleFunc("GET /basic-auth/{username}/{password}", s.handleBasicAuth)
+	s.mux.HandleFunc("GET /bearer-auth/{token}", s.handleBearerAuth)
 
 	s.mux.HandleFunc("GET /_health", s.handleHealth)
 }
